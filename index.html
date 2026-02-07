@@ -1,1 +1,898 @@
-<h1> egesgshsge</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Invited - The Cupid Times</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@0;1&family=Lora:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: #f5f1e8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            perspective: 1200px;
+            position: relative;
+            min-height: 500px;
+        }
+
+        .backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .envelope-wrapper {
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .envelope {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            background: #e8dcc8;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 3px solid #8b6f47;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: visible;
+        }
+
+        .envelope-body {
+            width: 100%;
+            height: 100%;
+            background: #e8dcc8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transition: transform 0.6s ease;
+        }
+
+        .envelope-body.open {
+            transform: translateY(-100%);
+        }
+
+        .envelope-flap {
+            width: 100%;
+            height: 200px;
+            background: #c9a87a;
+            position: absolute;
+            top: 0;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transition: transform 0.6s ease;
+            transform-origin: top;
+            cursor: pointer;
+            border-bottom: 2px solid #8b6f47;
+            z-index: 8;
+            pointer-events: none;
+        }
+
+        .envelope-flap.open {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-text {
+            text-align: center;
+            color: #3d2817;
+            font-size: 42px;
+            font-weight: 600;
+            font-family: 'Bodoni Moda', serif;
+            z-index: 15;
+            position: relative;
+        }
+
+        .envelope-address {
+            position: absolute;
+            left: 32px;
+            bottom: 30px;
+            color: #3d2817;
+            font-size: 18px;
+            font-weight: 500;
+            font-family: 'Lora', serif;
+            opacity: 0.95;
+            pointer-events: none;
+        }
+
+        .envelope-icon {
+            font-size: 20px;
+            margin-top: 15px;
+            letter-spacing: 15px;
+        }
+
+        /* Letter Styles */
+        .letter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .letter-container.open {
+            display: flex;
+        }
+
+        .letter {
+            background: #f9f6f0;
+            width: 100%;
+            max-width: 750px;
+            max-height: 85vh;
+            border-radius: 0;
+            padding: 60px 50px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid #8b6f47;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .letter-container.closing .letter {
+            animation: slideOut 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+        }
+
+        .close-letter {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #8b6f47;
+            transition: transform 0.2s ease;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .close-letter:hover {
+            transform: rotate(90deg);
+        }
+
+        .letter-header {
+            text-align: center;
+            border-bottom: 2px solid #8b6f47;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .letter-header-title {
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: #8b6f47;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .letter-header-date {
+            font-size: 13px;
+            color: #8b6f47;
+            margin-bottom: 15px;
+        }
+
+        .letter h1 {
+            color: #3d2817;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 42px;
+            font-family: 'Bodoni Moda', serif;
+            font-weight: 400;
+        }
+
+        .letter h2 {
+            color: #c9a87a;
+            text-align: center;
+            font-size: 32px;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 30px;
+            font-family: 'Bodoni Moda', serif;
+        }
+
+        .letter p {
+            color: #3d2817;
+            line-height: 1.9;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .letter-salutation {
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            aspect-ratio: 1;
+            max-height: 350px;
+            background: #3d2817;
+            border: 12px solid #8b6f47;
+            box-shadow: 0 0 0 3px #3d2817, 0 0 0 6px #8b6f47, inset 0 0 0 2px #f9f6f0;
+            margin: 35px 0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 12px;
+            background: repeating-linear-gradient(90deg, #8b6f47 0px, #8b6f47 8px, transparent 8px, transparent 16px);
+            top: -12px;
+            left: 0;
+        }
+
+        .photo-placeholder::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 12px;
+            background: repeating-linear-gradient(90deg, #8b6f47 0px, #8b6f47 8px, transparent 8px, transparent 16px);
+            bottom: -12px;
+            left: 0;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder span {
+            color: #f9f6f0;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .divider {
+            width: '80%;
+            height: 1px;
+            background: #8b6f47;
+            margin: 30px auto;
+        }
+
+        .agenda {
+            margin: 30px 0;
+        }
+
+        .agenda h3 {
+            color: #3d2817;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 20px;
+            font-family: 'Bodoni Moda', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .agenda-item {
+            margin: 20px 0;
+            padding: 20px;
+            background: transparent;
+            border-left: 3px solid #c9a87a;
+            padding-left: 20px;
+        }
+
+        .agenda-item strong {
+            color: #3d2817;
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .agenda-item p {
+            text-align: left;
+            color: #3d2817;
+            margin: 6px 0;
+            font-size: 14px;
+        }
+
+        .menu-button {
+            background: #8b6f47;
+            color: #f9f6f0;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Lora', serif;
+        }
+
+        .menu-button:hover {
+            background: #c9a87a;
+            color: #3d2817;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .signature {
+            margin-top: 40px;
+            text-align: center;
+            color: #3d2817;
+            font-style: italic;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* Menu Modal */
+        .menu-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .menu-modal.open {
+            display: flex;
+        }
+
+        .menu-content {
+            background: #f9f6f0;
+            width: 100%;
+            max-width: 600px;
+            max-height: 85vh;
+            border-radius: 0;
+            padding: 50px 40px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            animation: slideUp 0.5s ease;
+            position: relative;
+            border: 2px solid #8b6f47;
+        }
+
+        .menu-content h2 {
+            color: #3d2817;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+            font-family: 'Bodoni Moda', serif;
+        }
+
+        .menu-content-subtitle {
+            text-align: center;
+            color: #8b6f47;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #8b6f47;
+            padding-bottom: 15px;
+        }
+
+        .menu-section {
+            margin-bottom: 25px;
+        }
+
+        .menu-section h4 {
+            color: #8b6f47;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #c9a87a;
+            padding-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .menu-item {
+            color: #3d2817;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .menu-item strong {
+            color: #3d2817;
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .menu-item .description {
+            color: #5d4a34;
+            font-size: 13px;
+            font-style: italic;
+        }
+
+        .menu-item label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #3d2817;
+        }
+
+        .menu-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            cursor: pointer;
+            accent-color: #8b6f47;
+        }
+
+        .menu-submit-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #8b6f47;
+            text-align: center;
+        }
+
+        .menu-submit-button {
+            background: #8b6f47;
+            color: #f9f6f0;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Lora', serif;
+            transition: all 0.2s ease;
+        }
+
+        .menu-submit-button:hover {
+            background: #c9a87a;
+            color: #3d2817;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .selection-summary {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8ecf0;
+            border-left: 3px solid #8b6f47;
+            color: #3d2817;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .selection-summary.show {
+            display: block;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #8b6f47;
+            transition: transform 0.2s ease;
+            background: none;
+            border: none;
+        }
+
+        .close-menu:hover {
+            transform: rotate(90deg);
+        }
+
+        .rsvp-section {
+            margin-top: 40px;
+            border-top: 2px solid #8b6f47;
+            padding-top: 20px;
+        }
+
+        .rsvp-button {
+            background: #8b6f47;
+            color: #f9f6f0;
+            border: none;
+            padding: 12px 40px;
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Lora', serif;
+        }
+
+        .rsvp-button:hover {
+            background: #c9a87a;
+            color: #3d2817;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .rsvp-message {
+            display: none;
+            text-align: center;
+            color: #8b6f47;
+            font-style: italic;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .letter {
+                padding: 30px 20px;
+            }
+
+            .letter h1 {
+                font-size: 32px;
+            }
+
+            .letter h2 {
+                font-size: 24px;
+            }
+
+            .envelope {
+                height: 240px;
+                max-width: 92%;
+            }
+
+            .envelope-text {
+                font-size: 22px;
+            }
+
+            .photo-placeholder {
+                max-height: 250px;
+            }
+            .envelope-address {
+                left: 18px;
+                bottom: 18px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Envelope -->
+    <div class="container">
+        <div class="envelope-wrapper" onclick="openLetter()">
+            <div class="envelope">
+                <div class="envelope-flap" id="flap"></div>
+                <div class="envelope-body" id="body">
+                    <div class="envelope-text">
+                        <div>You're Invited</div>
+                        <div class="envelope-icon">✦ ✦ ✦</div>
+                    </div>
+                    <div class="envelope-address">To Mandy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Letter -->
+    <div class="letter-container" id="letterContainer">
+        <div class="letter">
+            <button class="close-letter" onclick="closeLetter()">✕</button>
+            
+            <div class="letter-header">
+                <div class="letter-header-title">The Cupid Times</div>
+                <div class="letter-header-date">February 14, 2026</div>
+            </div>
+
+            <h1>You're Invited</h1>
+            <h2>To Our Perfect Night</h2>
+
+            <div class="photo-placeholder" id="photoPlaceholder">
+                <img id="photoImg" style="display: none;">
+                <span id="photoText">Your Beautiful Moment Here</span>
+            </div>
+
+            <p class="letter-salutation">My Love,</p>
+
+            <p>
+                I have something special planned just for you; A night designed to celebrate not only your beautiful birthday, but also the love we share on this most romantic day of the year. Every detail has been carefully chosen with you in mind.
+            </p>
+
+            <p>
+                From an elegant dinner at one of the most prestigious venues, to capturing unforgettable moments together, this evening is all about you and making you feel just how cherished you truly are.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="agenda">
+                <h3>✦ A Night To Remember ✦</h3>
+
+                <div class="agenda-item">
+                    <strong>An Evening of Elegance</strong>
+                    <p><strong>Location:</strong> Ritz Carlton, Singapore</p>
+                    <p><strong>Time:</strong> 6:45 PM</p>
+                    <p>We'll begin with an exquisite dining experience, where each course has been thoughtfully selected. Discover what awaits you—</p>
+                    <button class="menu-button" onclick="openMenu()">◊ View the Menu ◊</button>
+                </div>
+
+                <div class="agenda-item">
+                    <strong>Capturing Forever</strong>
+                    <p><strong>Location:</strong> Suntec City, life4cuts</p>
+                    <p><strong>Time:</strong> 9:00 PM</p>
+                    <p>Let's freeze these beautiful moments together. Premium photo booth memories await.</p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="signature">
+                With all of my heart,<br>
+                Glenn 
+            </div>
+
+            <div class="rsvp-section">
+                <button class="rsvp-button" onclick="confirmRSVP()">✦ RSVP ✦</button>
+                <div class="rsvp-message" id="rsvpMessage">
+                    Thank you for confirming your presence. I can't wait to celebrate with you. 💕
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Modal -->
+    <div class="menu-modal" id="menuModal">
+        <div class="menu-content">
+            <button class="close-menu" onclick="closeMenu()">✕</button>
+            
+            <h2>Dinner Menu</h2>
+            <div class="menu-content-subtitle">Ritz Carlton Fine Dining</div>
+
+            <div class="menu-section">
+                <h4>Canapé</h4>
+                <div class="menu-item">
+                    <strong>Rosti, Devilled Egg Mousse, Caviar</strong>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h4>Starter</h4>
+                <div class="menu-item">
+                    <strong>Iwate Scallops</strong>
+                    <span class="description">Grilled Petite Pois, Pickled Watermelon Radish, Green Pea Cream</span>
+                    <label>
+                        <input type="checkbox" name="starter" value="Iwate Scallops">
+                        I'll have this
+                    </label>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h4>Soup</h4>
+                <div class="menu-item">
+                    <strong>Sweet Corn Velouté</strong>
+                    <span class="description">Crab, Chive Espuma</span>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h4>Main Course</h4>
+                <div class="menu-item">
+                    <strong>Omi A4 Striploin</strong>
+                    <span class="description">Charred Hispi, Parsley Emulsion, Perigeaux Sauce</span>
+                    <label>
+                        <input type="checkbox" name="main" value="Omi A4 Striploin">
+                        I'll have this
+                    </label>
+                </div>
+                <div class="menu-item">
+                    <strong>Turbot</strong>
+                    <span class="description">Smoked Mussels, Baby Fennel Slaw, Golden Coconut Sauce</span>
+                    <label>
+                        <input type="checkbox" name="main" value="Turbot">
+                        I'll have this
+                    </label>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h4>Dessert</h4>
+                <div class="menu-item">
+                    <strong>Salted Chocolate Cookie</strong>
+                    <span class="description">Vanilla Gelato, Hot Chocolate Espuma</span>
+                </div>
+            </div>
+
+            <p style="margin-top: 30px; text-align: center; color: #8b6f47; font-style: italic; font-size: 13px;">
+                Please share your preferred main course when you RSVP ✦
+            </p>
+
+            <div class="menu-submit-section">
+                <button class="menu-submit-button" onclick="submitMenuSelection()">✦ Submit My Selections ✦</button>
+                <div class="selection-summary" id="selectionSummary"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openLetter() {
+            const flap = document.getElementById('flap');
+            const body = document.getElementById('body');
+            const letterContainer = document.getElementById('letterContainer');
+
+            flap.classList.add('open');
+            body.classList.add('open');
+
+            setTimeout(() => {
+                letterContainer.classList.add('open');
+            }, 300);
+        }
+
+        function closeLetter() {
+            const letterContainer = document.getElementById('letterContainer');
+            const flap = document.getElementById('flap');
+            const body = document.getElementById('body');
+
+            letterContainer.classList.add('closing');
+
+            setTimeout(() => {
+                letterContainer.classList.remove('open');
+                letterContainer.classList.remove('closing');
+                flap.classList.remove('open');
+                body.classList.remove('open');
+            }, 400);
+        }
+
+        function openMenu() {
+            document.getElementById('menuModal').classList.add('open');
+        }
+
+        function closeMenu() {
+            document.getElementById('menuModal').classList.remove('open');
+        }
+
+        function submitMenuSelection() {
+            const selections = {};
+            const checkboxes = document.querySelectorAll('#menuModal input[type="checkbox"]:checked');
+            
+            if (checkboxes.length === 0) {
+                alert('Please select at least your main course preference.');
+                return;
+            }
+
+            checkboxes.forEach(checkbox => {
+                const name = checkbox.getAttribute('name');
+                const value = checkbox.value;
+                
+                if (!selections[name]) {
+                    selections[name] = [];
+                }
+                selections[name].push(value);
+            });
+
+            // Display confirmation
+            let summaryText = '<strong>Your Menu Selections:</strong><br>';
+            if (selections.starter) summaryText += `Starter: ${selections.starter.join(', ')}<br>`;
+            if (selections.main) summaryText += `Main: ${selections.main.join(', ')}<br>`;
+            if (selections.lobster) summaryText += `Upgrade: ${selections.lobster.join(', ')}<br>`;
+            
+            const summaryDiv = document.getElementById('selectionSummary');
+            summaryDiv.innerHTML = summaryText + '<br>✦ Saved! Please Screenshot this so that I have your preferences ✦';
+            summaryDiv.classList.add('show');
+
+            // Disable button and show it's been submitted
+            const button = document.querySelector('.menu-submit-button');
+            button.disabled = true;
+            button.innerHTML = '✓ Submitted';
+
+            // Save selections locally
+            localStorage.setItem('menuSelections', JSON.stringify(selections));
+            console.log('Menu Selections Saved:', selections);
+            
+            // Log to console for you to see
+            const message = `MENU SELECTIONS for your Valentine:\\n` +
+                (selections.starter ? `- Starter: ${selections.starter.join(', ')}\\n` : '') +
+                (selections.main ? `- Main Course: ${selections.main.join(', ')}\\n` : '') +
+                (selections.lobster ? `- Lobster Upgrade: Yes (+$58)\\n` : '');
+            console.log(message);
+        }
+
+        function confirmRSVP() {
+            const button = event.target;
+            const message = document.getElementById('rsvpMessage');
+            
+            button.style.opacity = '0.5';
+            button.disabled = true;
+            button.innerHTML = '✓ Confirmed';
+            message.style.display = 'block';
+        }
+
+        // Close letter by clicking outside (on the overlay)
+        document.getElementById('letterContainer').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLetter();
+            }
+        });
+
+        // Menu modal is closed only via the X button to preserve selections
+        // Clicking outside will not close it to prevent accidental loss of form data
+
+        // Replace placeholder image (modify the URL to your photo)
+        function setPhoto(imageUrl) {
+            const img = document.getElementById('photoImg');
+            const text = document.getElementById('photoText');
+            img.src = imageUrl;
+            img.style.display = 'block';
+            text.style.display = 'none';
+        }
+
+        // Load default image placed in the same folder (change filename if needed)
+        // To use a different image, call setPhoto('your-file.jpg') or replace the filename below.
+        setPhoto('img.1.jpeg');
+    </script>
+</body>
+</html>
