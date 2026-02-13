@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Lora', serif;
-            background: #f5f1e8;
+            background: linear-gradient(135deg, #ffe0f0 0%, #d8e8ff 45%, #ffe6ff 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -55,13 +55,13 @@
 
         .envelope {
             width: 100%;
-            max-width: 800px;
+            max-width: 880px;
             height: 400px;
             margin: 0 auto;
             position: relative;
-            background: #e8dcc8;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            border: 3px solid #8b6f47;
+            background: linear-gradient(135deg, rgba(255, 125, 166, 0.2), rgba(122, 184, 255, 0.25));
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            border: 3px solid #ff7da6;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -71,7 +71,7 @@
         .envelope-body {
             width: 100%;
             height: 100%;
-            background: #e8dcc8;
+            background: transparent;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -86,14 +86,14 @@
         .envelope-flap {
             width: 100%;
             height: 200px;
-            background: #c9a87a;
+            background: linear-gradient(135deg, #ff7da6, #7ab8ff);
             position: absolute;
             top: 0;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
             transition: transform 0.6s ease;
             transform-origin: top;
             cursor: pointer;
-            border-bottom: 2px solid #8b6f47;
+            border-bottom: 2px solid #ff7da6;
             z-index: 8;
             pointer-events: none;
         }
@@ -104,7 +104,7 @@
 
         .envelope-text {
             text-align: center;
-            color: #3d2817;
+            color: #243145;
             font-size: 42px;
             font-weight: 600;
             font-family: 'Bodoni Moda', serif;
@@ -116,7 +116,7 @@
             position: absolute;
             left: 32px;
             bottom: 30px;
-            color: #3d2817;
+            color: #243145;
             font-size: 18px;
             font-weight: 500;
             font-family: 'Lora', serif;
@@ -150,7 +150,7 @@
         }
 
         .letter {
-            background: #f9f6f0;
+            background: #fff9fd;
             width: 100%;
             max-width: 750px;
             max-height: 85vh;
@@ -159,7 +159,7 @@
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
             overflow-y: auto;
             position: relative;
-            border: 2px solid #8b6f47;
+            border: 2px solid #ff7da6;
             animation: slideIn 0.5s ease-out;
         }
 
@@ -195,7 +195,7 @@
             right: 20px;
             font-size: 28px;
             cursor: pointer;
-            color: #8b6f47;
+            color: #ff7da6;
             transition: transform 0.2s ease;
             background: none;
             border: none;
@@ -216,7 +216,7 @@
         .letter-header-title {
             font-size: 11px;
             letter-spacing: 3px;
-            color: #8b6f47;
+            color: #ff7da6;
             text-transform: uppercase;
             font-weight: 600;
         }
@@ -228,7 +228,7 @@
         }
 
         .letter h1 {
-            color: #3d2817;
+            color: #243145;
             text-align: center;
             margin-bottom: 10px;
             font-size: 42px;
@@ -237,7 +237,7 @@
         }
 
         .letter h2 {
-            color: #c9a87a;
+            color: #7ab8ff;
             text-align: center;
             font-size: 32px;
             font-style: italic;
@@ -247,7 +247,7 @@
         }
 
         .letter p {
-            color: #3d2817;
+            color: #243145;
             line-height: 1.9;
             margin-bottom: 15px;
             font-size: 15px;
@@ -262,9 +262,9 @@
             width: 100%;
             aspect-ratio: 1;
             max-height: 350px;
-            background: #3d2817;
-            border: 12px solid #8b6f47;
-            box-shadow: 0 0 0 3px #3d2817, 0 0 0 6px #8b6f47, inset 0 0 0 2px #f9f6f0;
+            background: #243145;
+            border: 12px solid #ff7da6;
+            box-shadow: 0 0 0 3px #243145, 0 0 0 6px #ff7da6, inset 0 0 0 2px #f9f6f0;
             margin: 35px 0;
             position: relative;
             overflow: hidden;
@@ -278,7 +278,7 @@
             position: absolute;
             width: 100%;
             height: 12px;
-            background: repeating-linear-gradient(90deg, #8b6f47 0px, #8b6f47 8px, transparent 8px, transparent 16px);
+            background: repeating-linear-gradient(90deg, #ff7da6 0px, #ff7da6 8px, transparent 8px, transparent 16px);
             top: -12px;
             left: 0;
         }
@@ -288,7 +288,7 @@
             position: absolute;
             width: 100%;
             height: 12px;
-            background: repeating-linear-gradient(90deg, #8b6f47 0px, #8b6f47 8px, transparent 8px, transparent 16px);
+            background: repeating-linear-gradient(90deg, #ff7da6 0px, #ff7da6 8px, transparent 8px, transparent 16px);
             bottom: -12px;
             left: 0;
         }
@@ -306,9 +306,9 @@
         }
 
         .divider {
-            width: '80%;
+            width: 80%;
             height: 1px;
-            background: #8b6f47;
+            background: linear-gradient(90deg, #ff7da6, #7ab8ff);
             margin: 30px auto;
         }
 
@@ -317,7 +317,7 @@
         }
 
         .agenda h3 {
-            color: #3d2817;
+            color: #243145;
             text-align: center;
             margin-bottom: 25px;
             font-size: 20px;
@@ -329,13 +329,13 @@
         .agenda-item {
             margin: 20px 0;
             padding: 20px;
-            background: transparent;
-            border-left: 3px solid #c9a87a;
+            background: linear-gradient(90deg, rgba(255, 125, 166, 0.08), rgba(122, 184, 255, 0.08));
+            border-left: 3px solid #ff7da6;
             padding-left: 20px;
         }
 
         .agenda-item strong {
-            color: #3d2817;
+            color: #243145;
             font-size: 16px;
             display: block;
             margin-bottom: 8px;
@@ -343,17 +343,17 @@
 
         .agenda-item p {
             text-align: left;
-            color: #3d2817;
+            color: #243145;
             margin: 6px 0;
             font-size: 14px;
         }
 
         .menu-button {
-            background: #8b6f47;
+            background: #ff7da6;
             color: #f9f6f0;
             border: none;
             padding: 10px 25px;
-            border-radius: 0;
+            border-radius: 999px;
             cursor: pointer;
             font-size: 13px;
             font-weight: 600;
@@ -365,8 +365,8 @@
         }
 
         .menu-button:hover {
-            background: #c9a87a;
-            color: #3d2817;
+            background: #7ab8ff;
+            color: #243145;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -374,7 +374,7 @@
         .signature {
             margin-top: 40px;
             text-align: center;
-            color: #3d2817;
+            color: #243145;
             font-style: italic;
             font-size: 15px;
             line-height: 1.8;
@@ -401,7 +401,7 @@
         }
 
         .menu-content {
-            background: #f9f6f0;
+            background: #fff9fd;
             width: 100%;
             max-width: 600px;
             max-height: 85vh;
@@ -411,11 +411,11 @@
             overflow-y: auto;
             animation: slideUp 0.5s ease;
             position: relative;
-            border: 2px solid #8b6f47;
+            border: 2px solid #ff7da6;
         }
 
         .menu-content h2 {
-            color: #3d2817;
+            color: #243145;
             text-align: center;
             margin-bottom: 10px;
             font-size: 32px;
@@ -424,7 +424,7 @@
 
         .menu-content-subtitle {
             text-align: center;
-            color: #8b6f47;
+            color: #ff7da6;
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -438,7 +438,7 @@
         }
 
         .menu-section h4 {
-            color: #8b6f47;
+            color: #ff7da6;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -449,21 +449,21 @@
         }
 
         .menu-item {
-            color: #3d2817;
+            color: #243145;
             margin-bottom: 15px;
             font-size: 14px;
             line-height: 1.6;
         }
 
         .menu-item strong {
-            color: #3d2817;
+            color: #243145;
             display: block;
             margin-bottom: 4px;
             font-weight: 600;
         }
 
         .menu-item .description {
-            color: #5d4a34;
+            color: #4a5570;
             font-size: 13px;
             font-style: italic;
         }
@@ -474,7 +474,7 @@
             cursor: pointer;
             margin-top: 10px;
             font-size: 14px;
-            color: #3d2817;
+            color: #243145;
         }
 
         .menu-item input[type="checkbox"] {
@@ -482,7 +482,7 @@
             height: 18px;
             margin-right: 10px;
             cursor: pointer;
-            accent-color: #8b6f47;
+            accent-color: #ff7da6;
         }
 
         .menu-submit-section {
@@ -523,9 +523,9 @@
             display: none;
             margin-top: 20px;
             padding: 15px;
-            background: #e8ecf0;
-            border-left: 3px solid #8b6f47;
-            color: #3d2817;
+            background: #e7f0ff;
+            border-left: 3px solid #ff7da6;
+            color: #243145;
             font-size: 13px;
             line-height: 1.6;
         }
@@ -540,7 +540,7 @@
             right: 20px;
             font-size: 28px;
             cursor: pointer;
-            color: #8b6f47;
+            color: #ff7da6;
             transition: transform 0.2s ease;
             background: none;
             border: none;
@@ -552,12 +552,12 @@
 
         .rsvp-section {
             margin-top: 40px;
-            border-top: 2px solid #8b6f47;
+            border-top: 2px solid #ff7da6;
             padding-top: 20px;
         }
 
         .rsvp-button {
-            background: #8b6f47;
+            background: linear-gradient(135deg, #ff7da6, #7ab8ff);
             color: #f9f6f0;
             border: none;
             padding: 12px 40px;
@@ -574,8 +574,8 @@
         }
 
         .rsvp-button:hover {
-            background: #c9a87a;
-            color: #3d2817;
+            background: #7ab8ff;
+            color: #243145;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -583,7 +583,7 @@
         .rsvp-message {
             display: none;
             text-align: center;
-            color: #8b6f47;
+            color: #ff7da6;
             font-style: italic;
             margin-top: 15px;
             font-size: 14px;
@@ -654,37 +654,37 @@
 
             <div class="photo-placeholder" id="photoPlaceholder">
                 <img id="photoImg" style="display: none;">
-                <span id="photoText">Your Beautiful Moment Here</span>
+                <span id="photoText">Our favourite photo goes here</span>
             </div>
 
-            <p class="letter-salutation">My Love,</p>
+            <p class="letter-salutation">My love,</p>
 
             <p>
-                I have something special planned just for you; A night designed to celebrate not only your beautiful birthday, but also the love we share on this most romantic day of the year. Every detail has been carefully chosen with you in mind.
+                I’ve planned a little adventure just for you – a night to celebrate your birthday and Valentine’s Day together, in the sweetest way I know how. Every stop, every detail, is chosen with you in mind.
             </p>
 
             <p>
-                From an elegant dinner at one of the most prestigious venues, to capturing unforgettable moments together, this evening is all about you and making you feel just how cherished you truly are.
+                From a slow, cosy dinner to laughing in a photobooth and wandering through toys like two big kids, this evening is all about us, and about making you feel as cherished as you truly are.
             </p>
 
             <div class="divider"></div>
 
             <div class="agenda">
-                <h3>✦ A Night To Remember ✦</h3>
+                <h3>✦ Our Birthday & Valentine’s Adventure ✦</h3>
 
                 <div class="agenda-item">
-                    <strong>An Evening of Elegance</strong>
-                    <p><strong>Location:</strong> Ritz Carlton, Singapore</p>
-                    <p><strong>Time:</strong> 6:45 PM</p>
-                    <p>We'll begin with an exquisite dining experience, where each course has been thoughtfully selected. Discover what awaits you—</p>
+                    <strong>1. Dinner & Birthday Toast</strong>
+                    <p><strong>Location:</strong> Ritz-Carlton, Millenia Singapore</p>
+                    <p><strong>Time:</strong> Dinner from about 6:45 PM</p>
+                    <p>We’ll start the evening with a beautiful dinner, just the two of us. Take your time to pick what you’d love to eat before the night —</p>
                     <button class="menu-button" onclick="openMenu()">◊ View the Menu ◊</button>
                 </div>
 
                 <div class="agenda-item">
-                    <strong>Capturing Forever</strong>
+                    <strong>2. Photobooth Memories</strong>
                     <p><strong>Location:</strong> Suntec City, life4cuts</p>
-                    <p><strong>Time:</strong> 9:00 PM</p>
-                    <p>Let's freeze these beautiful moments together. Premium photo booth memories await.</p>
+                    <p><strong>Time:</strong> After dinner</p>
+                    <p>We’ll head over to the photobooth to capture all our goofy, soft, and unfiltered moments together (yes, your DSLR is invited too).</p>
                 </div>
             </div>
 
@@ -692,7 +692,7 @@
 
             <div class="signature">
                 With all of my heart,<br>
-                Glenn 
+                Glenn
             </div>
 
             <div class="rsvp-section">
@@ -710,7 +710,7 @@
             <button class="close-menu" onclick="closeMenu()">✕</button>
             
             <h2>Dinner Menu</h2>
-            <div class="menu-content-subtitle">Ritz Carlton Fine Dining</div>
+            <div class="menu-content-subtitle">Ritz-Carlton, Millenia Singapore</div>
 
             <div class="menu-section">
                 <h4>Canapé</h4>
@@ -764,6 +764,29 @@
                 <div class="menu-item">
                     <strong>Salted Chocolate Cookie</strong>
                     <span class="description">Vanilla Gelato, Hot Chocolate Espuma</span>
+                </div>
+            </div>
+
+            <div class="menu-section">
+                <h4>Little Notes For The Night</h4>
+                <div class="menu-item">
+                    <strong>What to Wear</strong>
+                    <span class="description">
+                        Think smart casual date-night vibes – whatever you feel beautiful and comfortable in.
+                        Just no slippers or dri-fit gym wear, so you match the feel of the evening.
+                    </span>
+                </div>
+                <div class="menu-item">
+                    <strong>What to Bring</strong>
+                    <span class="description">
+                        Bring your DSLR so we can play with it at the photobooth.
+                    </span>
+                </div>
+                <div class="menu-item">
+                    <strong>Timing</strong>
+                    <span class="description">
+                        Be ready by <b>5:20 PM</b> at your place – I’ll come pick you up, and you won’t have to worry about anything else.
+                    </span>
                 </div>
             </div>
 
